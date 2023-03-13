@@ -10,7 +10,7 @@ def test_reg_form_from_button_on_main(browser):
     browser.get(url)
     browser.find_element(*TestLocators.LOG_IN_BUTTON_FROM_MAIN).click()
     WebDriverWait(browser, 5).until(expected_conditions.visibility_of_element_located(TestLocators.REG_BUTTON_FROM_AUTH))
-
+    assert browser.find_element(*TestLocators.REG_BUTTON_FROM_AUTH)
 # проверка описания кнопки регистрации
 def test_check_text_near_button_of_registration(browser):
     url = 'https://stellarburgers.nomoreparties.site/'
@@ -44,6 +44,7 @@ def test_complete_registration(browser):
     browser.find_element(*TestLocators.PASS_INPUT_FROM_REG).send_keys(password())
     browser.find_element(*TestLocators.REG_BUTTON_FROM_REG).click()
     WebDriverWait(browser, 5).until(expected_conditions.visibility_of_element_located(TestLocators.TITLE_FROM_AUTH))
+    assert browser.find_element(*TestLocators.TITLE_FROM_AUTH)
 
 # #проверка без заполненного поля
 def test_registration_without_text_in_inputs(browser):
@@ -53,6 +54,7 @@ def test_registration_without_text_in_inputs(browser):
     browser.find_element(*TestLocators.REG_BUTTON_FROM_AUTH).click()
     browser.find_element(*TestLocators.REG_BUTTON_FROM_REG).click()
     WebDriverWait(browser, 5).until(expected_conditions.visibility_of_element_located(TestLocators.TITLE_FROM_REG))
+    assert browser.find_element(*TestLocators.TITLE_FROM_REG)
 # #пароль <6 симв
 def test_registrarion_with_wrong_pwd(browser):
     url = 'https://stellarburgers.nomoreparties.site/'
@@ -62,9 +64,9 @@ def test_registrarion_with_wrong_pwd(browser):
     browser.find_element(*TestLocators.PASS_INPUT_FROM_REG).send_keys('Qwert')
     browser.find_element(*TestLocators.REG_BUTTON_FROM_REG).click()
     WebDriverWait(browser, 1).until(expected_conditions.presence_of_element_located(TestLocators.ERROR_OF_PWD))
-
+    assert browser.find_element(*TestLocators.ERROR_OF_PWD)
 # #регистрация с пустым именем
-def reg_without_name(browser):
+def test_reg_without_name(browser):
     url = 'https://stellarburgers.nomoreparties.site/'
     browser.get(url)
     browser.find_element(*TestLocators.LOG_IN_BUTTON_FROM_MAIN).click()
@@ -73,5 +75,6 @@ def reg_without_name(browser):
     browser.find_element(*TestLocators.PASS_INPUT_FROM_REG).send_keys(password())
     browser.find_element(*TestLocators.REG_BUTTON_FROM_REG).click()
     WebDriverWait(browser, 5).until(expected_conditions.visibility_of_element_located(TestLocators.TITLE_FROM_REG))
+    assert browser.find_element(*TestLocators.TITLE_FROM_REG)
 
 
